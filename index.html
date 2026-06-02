@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is Brightside the Right Fit for You? | Brightside Health</title>
+<meta name="description" content="Take this 2-minute therapist fit assessment and discover how your work style, career goals, and preferences align with Brightside's approach to virtual mental healthcare.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sapphire: #2E4985;
+    --aqua: #ACE2E4;
+    --aqua-dark: #3882DF;
+    --aqua-bright: #39CEF6;
+    --white: #FFFFFF;
+    --dark-grey: #5E6883;
+    --bg-light: #F4F7FC;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: var(--bg-light);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px 60px;
+  }
+
+  .quiz-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: 0 4px 32px rgba(46,73,133,0.10), 0 1px 4px rgba(46,73,133,0.06);
+  }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* HEADER */
+  .quiz-header {
+    background: var(--sapphire);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .burst-icon { width: 28px; height: 28px; flex-shrink: 0; }
+
+  .wordmark {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--white);
+    letter-spacing: -0.2px;
+  }
+
+  /* INTRO HERO */
+  .hero {
+    background: linear-gradient(155deg, #EDF3FC 0%, #E4F8F9 100%);
+    padding: 36px 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(172,226,228,0.22);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -28px; left: -36px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(56,130,223,0.09);
+  }
+
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--aqua-dark);
+    margin-bottom: 10px;
+  }
+
+  .hero-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--sapphire);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--dark-grey);
+    line-height: 1.65;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 26px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .chip {
+    background: var(--white);
+    border: 1px solid rgba(46,73,133,0.18);
+    border-radius: 999px;
+    padding: 5px 13px;
+    font-size: 12px;
+    color: var(--sapphire);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  .btn-primary {
+    background: var(--sapphire);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 14px 30px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    letter-spacing: 0.1px;
+    transition: opacity 0.15s, transform 0.1s;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-primary:active { transform: scale(0.98); }
+
+  .time-note {
+    font-size: 12px;
+    color: var(--dark-grey);
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* PROGRESS */
+  .progress-wrap { padding: 20px 28px 0; }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .progress-label { font-size: 12px; color: var(--dark-grey); }
+
+  .progress-count {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sapphire);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .progress-bar-bg {
+    height: 4px;
+    background: rgba(46,73,133,0.12);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--aqua-dark);
+    border-radius: 99px;
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* QUESTION */
+  .question-wrap { padding: 22px 28px 14px; }
+
+  .q-number {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--aqua-dark);
+    margin-bottom: 8px;
+  }
+
+  .q-text {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--sapphire);
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option-btn {
+    background: var(--white);
+    border: 1.5px solid rgba(46,73,133,0.16);
+    border-radius: 10px;
+    padding: 13px 16px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--dark-grey);
+    transition: border-color 0.15s, background 0.15s, color 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.45;
+    width: 100%;
+  }
+
+  .option-btn:hover {
+    border-color: var(--aqua-dark);
+    background: rgba(56,130,223,0.04);
+    color: var(--sapphire);
+    transform: translateX(2px);
+  }
+
+  .option-btn.selected {
+    border-color: var(--aqua-dark);
+    background: rgba(56,130,223,0.07);
+    color: var(--sapphire);
+    font-weight: 500;
+  }
+
+  .option-radio {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(46,73,133,0.22);
+    flex-shrink: 0;
+    transition: border-color 0.15s, background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .option-btn.selected .option-radio {
+    border-color: var(--aqua-dark);
+    background: var(--aqua-dark);
+  }
+
+  .option-radio-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .option-btn.selected .option-radio-dot { opacity: 1; }
+
+  .nav-row {
+    padding: 18px 28px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1.5px solid rgba(46,73,133,0.2);
+    border-radius: 10px;
+    padding: 11px 20px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--sapphire);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .btn-back:hover { background: rgba(46,73,133,0.05); }
+
+  .btn-next {
+    background: var(--sapphire);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 26px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--white);
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+
+  .btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-next:disabled { opacity: 0.32; cursor: default; transform: none; }
+
+  /* RESULTS */
+  .results-hero {
+    background: var(--sapphire);
+    padding: 32px 28px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .results-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: rgba(57,206,246,0.11);
+  }
+
+  .results-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -45px; left: -30px;
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: rgba(172,226,228,0.09);
+  }
+
+  .results-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--aqua-bright);
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .score-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.09);
+    border: 3px solid rgba(57,206,246,0.45);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .score-num {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .score-pct {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .result-tier {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .result-tier-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.68);
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+    z-index: 1;
+  }
+
+  .results-body { padding: 24px 28px; }
+
+  .insight-block { margin-bottom: 20px; }
+
+  .insight-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--aqua-dark);
+    margin-bottom: 10px;
+  }
+
+  .insight-desc {
+    font-size: 14px;
+    color: var(--dark-grey);
+    line-height: 1.7;
+  }
+
+  .align-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 12px;
+  }
+
+  .align-tag {
+    background: #EDF3FC;
+    color: var(--sapphire);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(46,73,133,0.1);
+    margin: 20px 0;
+  }
+
+  .consider-list { list-style: none; margin-top: 10px; }
+
+  .consider-list li {
+    font-size: 14px;
+    color: var(--dark-grey);
+    padding: 4px 0 4px 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .consider-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--aqua-dark);
+    font-size: 12px;
+    top: 5px;
+  }
+
+  .cta-block {
+    background: linear-gradient(135deg, #EDF3FC, #E4F8F9);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .cta-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--sapphire);
+    margin-bottom: 6px;
+  }
+
+  .cta-desc {
+    font-size: 13px;
+    color: var(--dark-grey);
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+
+  .btn-cta {
+    background: var(--sapphire);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 13px 24px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+
+  .btn-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .retake-link {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--dark-grey);
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: 'DM Sans', sans-serif;
+    background: none;
+    border: none;
+  }
+
+  .retake-link:hover { color: var(--sapphire); }
+
+  @media (max-width: 480px) {
+    body { padding: 0; }
+    .quiz-card { border-radius: 0; min-height: 100vh; box-shadow: none; }
+    .hero-title { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="quiz-card" role="main">
+
+  <!-- SHARED HEADER -->
+  <div class="quiz-header">
+    <svg class="burst-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="12.5" y="2" width="5" height="10" rx="2.5" fill="#39CEF6"/>
+      <rect x="12.5" y="16" width="5" height="10" rx="2.5" fill="#3882DF"/>
+      <rect x="2" y="12.5" width="10" height="5" rx="2.5" fill="#3882DF"/>
+      <rect x="16" y="12.5" width="10" height="5" rx="2.5" fill="#39CEF6"/>
+      <rect x="4.636" y="4.636" width="5" height="10" rx="2.5" transform="rotate(-45 4.636 4.636)" fill="#3882DF"/>
+      <rect x="15.657" y="15.657" width="5" height="10" rx="2.5" transform="rotate(-45 15.657 15.657)" fill="#39CEF6"/>
+    </svg>
+    <span class="wordmark">Brightside Health</span>
+  </div>
+
+  <!-- SCREEN: INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="hero">
+      <p class="hero-label">Therapist Fit Assessment</p>
+      <h1 class="hero-title">Is Brightside the<br>Right Fit for You?</h1>
+      <p class="hero-sub">Take this 2-minute assessment and discover how your work style, career goals, and preferences align with Brightside's approach to virtual mental healthcare.</p>
+      <div class="hero-chips">
+        <span class="chip">Your Compatibility Score</span>
+        <span class="chip">Personalized insights</span>
+        <span class="chip">Areas of alignment</span>
+      </div>
+      <button class="btn-primary" onclick="startQuiz()">Begin Assessment</button>
+      <p class="time-note">7 questions &middot; About 2 minutes</p>
+    </div>
+  </div>
+
+  <!-- SCREEN: QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">Your assessment</span>
+        <span class="progress-count" id="q-counter">1 of 7</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill" style="width:14%"></div>
+      </div>
+    </div>
+    <div class="question-wrap">
+      <p class="q-number" id="q-number">Question 1</p>
+      <p class="q-text" id="q-text"></p>
+      <div class="options-list" id="options-list"></div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="prevQ()" style="display:none">Back</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()" disabled>Continue</button>
+    </div>
+  </div>
+
+  <!-- SCREEN: RESULTS -->
+  <div class="screen" id="screen-results">
+    <div class="results-hero">
+      <p class="results-label">Your Results</p>
+      <div class="score-circle">
+        <span class="score-num" id="res-score">—</span>
+        <span class="score-pct">Match</span>
+      </div>
+      <p class="result-tier" id="res-tier"></p>
+      <p class="result-tier-sub" id="res-sub"></p>
+    </div>
+    <div class="results-body" id="results-body"></div>
+  </div>
+
+</div>
+
+<script>
+  var questions = [
+    {
+      text: "What matters most to you in your next role?",
+      options: [
+        { text: "Flexibility and autonomy over my schedule", score: 5 },
+        { text: "Meaningful clinical impact at scale", score: 5 },
+        { text: "Stable, predictable referrals and income", score: 4 },
+        { text: "Strong clinical support and collaboration", score: 5 },
+        { text: "A mix of several of these factors", score: 4 }
+      ]
+    },
+    {
+      text: "How important is fully remote work to you?",
+      options: [
+        { text: "Non-negotiable — I need to work from home", score: 5 },
+        { text: "Very important to me", score: 5 },
+        { text: "A nice bonus, but not essential", score: 2 },
+        { text: "Doesn't matter much either way", score: 1 }
+      ]
+    },
+    {
+      text: "What best describes your ideal schedule?",
+      options: [
+        { text: "Maximum flexibility — I set my own hours", score: 5 },
+        { text: "Mostly flexible with some consistency", score: 5 },
+        { text: "A predictable weekly structure I can rely on", score: 3 },
+        { text: "A structured, set schedule each week", score: 2 }
+      ]
+    },
+    {
+      text: "How important is mission alignment to you?",
+      options: [
+        { text: "Extremely important — it's why I do this work", score: 5 },
+        { text: "Very important to me", score: 5 },
+        { text: "Somewhat important", score: 3 },
+        { text: "Less important than other factors", score: 1 }
+      ]
+    },
+    {
+      text: "Which statement sounds most like you right now?",
+      options: [
+        { text: "I want more freedom and flexibility in my career", score: 5 },
+        { text: "I want more clinical support and collaboration", score: 5 },
+        { text: "I want to make a bigger impact", score: 5 },
+        { text: "I want more stability and consistent income", score: 4 },
+        { text: "I want a healthier, more sustainable long-term career", score: 5 }
+      ]
+    },
+    {
+      text: "What concerns you most about remote therapy work?",
+      options: [
+        { text: "Isolation and lack of peer connection", score: 3 },
+        { text: "Inconsistent referrals and caseload", score: 4 },
+        { text: "Administrative and billing burden", score: 5 },
+        { text: "Burnout from working alone", score: 4 },
+        { text: "Finding the right organization to trust", score: 5 }
+      ]
+    },
+    {
+      text: "What type of support matters most to you?",
+      options: [
+        { text: "Clinical consultation and peer support", score: 5 },
+        { text: "Reliable referrals and a full caseload", score: 5 },
+        { text: "Administrative and billing handled for me", score: 5 },
+        { text: "Great technology and systems", score: 5 },
+        { text: "Flexibility to practice on my own terms", score: 5 }
+      ]
+    }
+  ];
+
+  var current = 0;
+  var answers = [];
+  var selected = null;
+
+  function startQuiz() {
+    document.getElementById('screen-intro').classList.remove('active');
+    document.getElementById('screen-quiz').classList.add('active');
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    var q = questions[current];
+    document.getElementById('q-number').textContent = 'Question ' + (current + 1);
+    document.getElementById('q-text').textContent = q.text;
+    document.getElementById('q-counter').textContent = (current + 1) + ' of ' + questions.length;
+    document.getElementById('progress-fill').style.width = (((current + 1) / questions.length) * 100) + '%';
+    document.getElementById('btn-back').style.display = current > 0 ? 'inline-block' : 'none';
+    document.getElementById('btn-next').disabled = true;
+
+    selected = answers[current] !== undefined ? answers[current] : null;
+
+    var list = document.getElementById('options-list');
+    list.innerHTML = '';
+
+    q.options.forEach(function(opt, i) {
+      var btn = document.createElement('button');
+      btn.className = 'option-btn' + (selected === i ? ' selected' : '');
+      btn.setAttribute('aria-pressed', selected === i ? 'true' : 'false');
+      btn.innerHTML = '<span class="option-radio"><span class="option-radio-dot"></span></span>' + opt.text;
+      btn.onclick = (function(idx) { return function() { selectOption(idx); }; })(i);
+      list.appendChild(btn);
+    });
+
+    if (selected !== null) {
+      document.getElementById('btn-next').disabled = false;
+    }
+
+    var nextBtn = document.getElementById('btn-next');
+    nextBtn.textContent = current === questions.length - 1 ? 'See My Results' : 'Continue';
+  }
+
+  function selectOption(i) {
+    selected = i;
+    answers[current] = i;
+    document.querySelectorAll('.option-btn').forEach(function(b, idx) {
+      b.classList.toggle('selected', idx === i);
+      b.setAttribute('aria-pressed', idx === i ? 'true' : 'false');
+    });
+    document.getElementById('btn-next').disabled = false;
+  }
+
+  function nextQ() {
+    if (selected === null) return;
+    if (current < questions.length - 1) {
+      current++;
+      renderQuestion();
+    } else {
+      showResults();
+    }
+  }
+
+  function prevQ() {
+    if (current > 0) {
+      current--;
+      renderQuestion();
+    }
+  }
+
+  function showResults() {
+    var total = 0;
+    var max = 0;
+    answers.forEach(function(ansIdx, qIdx) {
+      if (ansIdx !== undefined) {
+        total += questions[qIdx].options[ansIdx].score;
+      }
+      max += 5;
+    });
+
+    var pct = Math.round((total / max) * 100);
+
+    document.getElementById('screen-quiz').classList.remove('active');
+    document.getElementById('screen-results').classList.add('active');
+    document.getElementById('res-score').textContent = pct + '%';
+
+    var tier, tierSub, desc, tags, considers, ctaTitle, ctaDesc, ctaUrl;
+
+    ctaUrl = 'https://www.brightside.com/careers'; // ← UPDATE THIS LINK
+
+    if (pct >= 90) {
+      tier = 'Exceptional Fit';
+      tierSub = 'Your preferences align strongly with Brightside\'s model';
+      desc = 'Based on your responses, your values and work preferences align closely with what Brightside is built for. You appear to prioritize flexibility, mission-driven care, and sustainable remote practice — and those are exactly what Brightside is designed to support.';
+      tags = ['Flexible scheduling', 'Fully remote', 'W2 employment', 'Mission-driven care', 'Reliable referrals', 'Admin handled for you'];
+      considers = null;
+      ctaTitle = 'Ready to take the next step?';
+      ctaDesc = 'Explore current openings and connect with the Brightside clinical team.';
+    } else if (pct >= 75) {
+      tier = 'Strong Fit';
+      tierSub = 'Many aspects of Brightside\'s model align with what you\'re looking for';
+      desc = 'There are clear areas of alignment between your priorities and what Brightside offers — particularly around flexibility, remote work, and clinical support. A few areas may be worth exploring more before making your decision.';
+      tags = ['Flexible scheduling', 'Fully remote', 'Collaborative support', 'Stable caseload'];
+      considers = ['Review Brightside\'s scheduling expectations', 'Learn more about the clinical support structures', 'Talk with a recruiter about your specific situation'];
+      ctaTitle = 'Curious? Let\'s talk.';
+      ctaDesc = 'Connect with a clinical recruiter to explore whether this could be the right fit.';
+    } else if (pct >= 60) {
+      tier = 'Potential Fit';
+      tierSub = 'Some areas align well — others are worth a closer look';
+      desc = 'Some aspects of Brightside\'s model may fit your preferences well, while others may differ from your ideal environment. The best career decisions come from understanding those differences clearly — not ignoring them.';
+      tags = ['Remote work available', 'W2 employment', 'Admin support'];
+      considers = ['Explore scheduling flexibility in more depth', 'Consider your preferred clinical populations', 'Ask about caseload consistency and support structures'];
+      ctaTitle = 'Have questions? We\'d love to answer them.';
+      ctaDesc = 'Connect with a recruiter — no commitment, just a real conversation.';
+    } else {
+      tier = 'Selective Fit';
+      tierSub = 'Your ideal environment may differ from Brightside\'s current model';
+      desc = 'Based on your responses, your ideal work environment may differ from some aspects of how Brightside currently operates. That\'s completely okay — the best career decisions come from finding the environment that genuinely supports your goals and values.';
+      tags = [];
+      considers = ['Consider what type of practice setting would energize you most', 'Explore what support structures matter most to you', 'Reflect on your remote vs. in-person preferences'];
+      ctaTitle = 'Still want to learn more?';
+      ctaDesc = 'We\'re happy to share more about Brightside — you may find something that surprises you.';
+    }
+
+    document.getElementById('res-tier').textContent = tier;
+    document.getElementById('res-sub').textContent = tierSub;
+
+    var html = '<div class="insight-block"><p class="insight-title">Your Alignment</p><p class="insight-desc">' + desc + '</p>';
+
+    if (tags.length > 0) {
+      html += '<div class="align-tags">';
+      tags.forEach(function(t) { html += '<span class="align-tag">' + t + '</span>'; });
+      html += '</div>';
+    }
+
+    html += '</div>';
+
+    if (considers && considers.length > 0) {
+      html += '<hr class="divider"><div class="insight-block"><p class="insight-title">Questions to Consider</p><ul class="consider-list">';
+      considers.forEach(function(c) { html += '<li>' + c + '</li>'; });
+      html += '</ul></div>';
+    }
+
+    html += '<div class="cta-block">';
+    html += '<p class="cta-title">' + ctaTitle + '</p>';
+    html += '<p class="cta-desc">' + ctaDesc + '</p>';
+    html += '<a class="btn-cta" href="' + ctaUrl + '" target="_blank" rel="noopener">Explore Careers at Brightside</a>';
+    html += '</div>';
+    html += '<button class="retake-link" onclick="retake()">Retake the assessment</button>';
+
+    document.getElementById('results-body').innerHTML = html;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function retake() {
+    current = 0;
+    answers = [];
+    selected = null;
+    document.getElementById('screen-results').classList.remove('active');
+    document.getElementById('screen-intro').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
