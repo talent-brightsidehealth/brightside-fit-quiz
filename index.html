@@ -601,6 +601,13 @@
 </div>
 
 <script>
+var urlParams = new URLSearchParams(window.location.search);
+var trackedName = urlParams.get('name') || '';
+var trackedEmail = urlParams.get('email') || '';
+
+var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz8q2RfnpwDMGjwbH6YfpAaemFUlBSSzVv6mytzueFnnoPylP0nvq8eZbaJsf9m-aCT_A/exec';
+
+
   var questions = [
     {
       text: "What matters most to you in your next role?",
@@ -728,6 +735,14 @@
       current++;
       renderQuestion();
     } else {
+function sendToSheet(payload) {
+  fetch(SHEET_ENDPOINT, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function(err) { console.warn('Tracking error:', err); });
+}
       showResults();
     }
   }
@@ -750,7 +765,19 @@
     });
 
     var pct = Math.round((total / max) * 100);
+var answerSummary = answers.map(function(ansIdx, qIdx) {
+  return 'Q' + (qIdx + 1) + ': ' + questions[qIdx].options[ansIdx].text;
+}).join(' | ');
 
+var tierLabel = pct >= 90 ? 'Exceptional Fit' : pct >= 75 ? 'Strong Fit' : pct >= 60 ? 'Potential Fit' : 'Selective Fit';
+
+sendToSheet({
+  name: trackedName,
+  email: trackedEmail,
+  score: pct + '%',
+  tier: tierLabel,
+  answers: answerSummary
+});
     document.getElementById('screen-quiz').classList.remove('active');
     document.getElementById('screen-results').classList.add('active');
     document.getElementById('res-score').textContent = pct + '%';
@@ -836,4 +863,3 @@
 
 </body>
 </html>
-
