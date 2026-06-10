@@ -729,23 +729,25 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz8q2RfnpwDMGjwbH6
     document.getElementById('btn-next').disabled = false;
   }
 
+ function sendToSheet(payload) {
+    fetch(SHEET_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function(err) { console.warn('Tracking error:', err); });
+  }
+
   function nextQ() {
     if (selected === null) return;
     if (current < questions.length - 1) {
       current++;
       renderQuestion();
     } else {
-function sendToSheet(payload) {
-  fetch(SHEET_ENDPOINT, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).catch(function(err) { console.warn('Tracking error:', err); });
-}
       showResults();
     }
   }
+
 
   function prevQ() {
     if (current > 0) {
