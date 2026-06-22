@@ -696,7 +696,14 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz8q2RfnpwDMGjwbH6
   var current = 0;
   var answers = [];
   var selected = null;
-
+function submitCapture() {
+  var email = document.getElementById('capture-email').value;
+  if (!email) { alert('Please enter your email to continue.'); return; }
+  trackedEmail = email;
+  trackedSource = 'external';
+  document.getElementById('screen-capture').classList.remove('active');
+  document.getElementById('screen-intro').classList.add('active');
+}
   function startQuiz() {
     document.getElementById('screen-intro').classList.remove('active');
     document.getElementById('screen-quiz').classList.add('active');
